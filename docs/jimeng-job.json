@@ -1,0 +1,31 @@
+{
+  "jobKey": "ui-directions-v2",
+  "canvasId": "f0197840-970c-4cd5-90f2-a4d3b1555b0a",
+  "model": "seedream_5.0_lite",
+  "items": {
+    "A-desktop": {
+      "nodeId": "node_pvpvc02fsn",
+      "submitId": "24ec0c07-d6ef-433d-a2f6-15cb15a24d36"
+    },
+    "A-mobile": {
+      "nodeId": "node_eqbrh1ya66",
+      "submitId": "572ec549-966a-4890-8bb3-47d5b60caaa2"
+    },
+    "B-desktop": {
+      "nodeId": "node_5kw3tpyzye",
+      "submitId": "e79d53da-3d94-47b9-b836-408854b2efd0"
+    },
+    "B-mobile": {
+      "nodeId": "node_hfaf99z5xm",
+      "submitId": "511fcfd8-3dfb-493d-b8c3-325a69813dd6"
+    },
+    "C-desktop": {
+      "nodeId": "node_nn5heq7cg3",
+      "submitId": "a9898e0a-e088-4112-96bf-dc23ebcc1cd5"
+    },
+    "C-mobile": {
+      "nodeId": "node_q9bvwjg2q3",
+      "submitId": "ea8c782a-7699-4f27-a160-3b5338973d25"
+    }
+  }
+}

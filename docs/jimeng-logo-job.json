@@ -1,0 +1,19 @@
+{
+  "jobKey": "logo-dio-delle-stelle",
+  "canvasId": "f0197840-970c-4cd5-90f2-a4d3b1555b0a",
+  "model": "seedream_5.0_lite",
+  "items": {
+    "logo-A": {
+      "nodeId": "node_0rk9z3b8mc",
+      "submitId": "7a1a32a8-3d78-4582-a845-a79aad1721f4"
+    },
+    "logo-B": {
+      "nodeId": "node_3bhyyjf4nk",
+      "submitId": "80abd6e8-8be5-4c93-8751-6c5381a7381b"
+    },
+    "logo-C": {
+      "nodeId": "node_vjq1p6z4jj",
+      "submitId": "d3f70ad1-c21a-4382-8a50-a36901ccc86c"
+    }
+  }
+}
