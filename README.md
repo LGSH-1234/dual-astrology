@@ -25,7 +25,7 @@ npm start          # 构建后由服务端同端口提供页面和接口
 | `npm run dev` | 同时启动前端和 API |
 | `npm start` | 构建前端并启动服务（页面 + 接口同端口） |
 | `npm run build` | 类型检查 + 生产构建 |
-| `npm test` | 单元测试（Vitest，75 项） |
+| `npm test` | 单元测试（Vitest，76 项） |
 | `npm run standalone` | 生成单文件体验版 `dist-standalone/DioDelleStelle.html`，双击即可打开 |
 | `npm run e2e` | 端到端测试（Playwright，30 项），截图输出到 `docs/screenshots` |
 

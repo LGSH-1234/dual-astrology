@@ -1,11 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { astro } from 'iztro';
-import { hourToTimeIndex, localToUtc, resolveBirth } from '../../src/lib/astro/time';
+import { hourToTimeIndex, isValidCalendarDate, localDateString, localToUtc, resolveBirth } from '../../src/lib/astro/time';
 import { computeZiwei, computeZiweiHoroscope, soulPalace, validateZiweiHoroscope, ZiweiHoroscopeError } from '../../src/lib/astro/ziwei';
 import { buildSnapshot, westernDaily, ziweiDaily, ziweiSummary, westernSummary } from '../../src/lib/astro/snapshot';
 import type { BirthProfile } from '../../src/lib/types';
 
 describe('时间换算', () => {
+  it('公历日期校验不受正负时区影响，今天使用本地日期', () => {
+    const previous = process.env.TZ;
+    try {
+      for (const tz of ['Asia/Shanghai', 'America/Los_Angeles']) {
+        process.env.TZ = tz;
+        expect(isValidCalendarDate('1995-02-23')).toBe(true);
+        expect(isValidCalendarDate('2024-02-29')).toBe(true);
+        expect(isValidCalendarDate('2023-02-29')).toBe(false);
+        expect(isValidCalendarDate('2026-13-01')).toBe(false);
+        expect(localDateString(new Date(2026, 9, 2, 0, 30))).toBe('2026-10-02');
+      }
+    } finally {
+      if (previous === undefined) delete process.env.TZ;
+      else process.env.TZ = previous;
+    }
+  });
   it('1988 年中国夏令时按 UTC+9 换算', () => {
     const { utc, offset } = localToUtc('1988-07-01', '12:00', 'Asia/Shanghai');
     expect(offset).toBe(540);

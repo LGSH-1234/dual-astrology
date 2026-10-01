@@ -1,7 +1,7 @@
 import { useId, useState, type FormEvent } from 'react';
 import { normalizeCityId, regionChain } from '../data/cities';
 import { LocationPicker } from './LocationPicker';
-import { resolveBirth } from '../lib/astro/time';
+import { isValidCalendarDate, localDateString, resolveBirth } from '../lib/astro/time';
 import { validateZiweiHoroscope } from '../lib/astro/ziwei';
 import type { BirthProfile, Gender } from '../lib/types';
 
@@ -33,9 +33,8 @@ export function BirthForm({
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return setError('请填写出生日期');
     const y = Number(date.slice(0, 4));
     if (y < 1900 || y > 2100) return setError('出生年份需在 1900–2100 之间');
-    const parsedDate = new Date(`${date}T00:00:00`);
-    if (Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== date) return setError('出生日期无效');
-    if (date > new Date().toISOString().slice(0, 10)) return setError('出生日期不能晚于今天');
+    if (!isValidCalendarDate(date)) return setError('出生日期无效');
+    if (date > localDateString()) return setError('出生日期不能晚于今天');
     if (timeKnown && !/^\d{2}:\d{2}$/.test(time)) return setError('请填写出生时间');
     if (timeKnown) {
       const [hour, minute] = time.split(':').map(Number);
@@ -98,7 +97,7 @@ export function BirthForm({
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="label" htmlFor={`${id}-date`}>出生日期（公历）</label>
-          <input id={`${id}-date`} type="date" className="input" value={date} min="1900-01-01" max={new Date().toISOString().slice(0, 10)} onChange={(e) => setDate(e.target.value)} />
+          <input id={`${id}-date`} type="date" className="input" value={date} min="1900-01-01" max={localDateString()} onChange={(e) => setDate(e.target.value)} />
         </div>
         <div>
           <label className="label" htmlFor={`${id}-time`}>出生时间（当地钟表时间）</label>

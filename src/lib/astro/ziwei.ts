@@ -1,4 +1,5 @@
 import { astro } from 'iztro';
+import { localDateString } from './time';
 import type { Gender, Mutagen, ZiweiChart, ZiweiHoroscope, ZiweiPalace, ZiweiStar } from '../types';
 
 const MUTAGENS: Mutagen[] = ['禄', '权', '科', '忌'];
@@ -93,7 +94,7 @@ export function computeZiwei(solarDate: string, timeIndex: number, gender: Gende
 
 /** 大限、流年、流日。date 为查看日期，取当日正午避免跨日。 */
 export function computeZiweiHoroscope(solarDate: string, timeIndex: number, gender: Gender, date: Date): ZiweiHoroscope {
-  const targetDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const targetDate = localDateString(date);
   if (solarDate > targetDate) throw new ZiweiHoroscopeError('出生日期不能晚于当前运限日期。');
   const a = buildAstrolabe(solarDate, timeIndex, gender);
   const noon = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
@@ -130,7 +131,7 @@ export function computeZiweiHoroscope(solarDate: string, timeIndex: number, gend
 
 /** 返回表单可直接展示的校验错误；合法资料返回 null。 */
 export function validateZiweiHoroscope(solarDate: string, timeIndex: number, gender: Gender, date = new Date()): string | null {
-  if (solarDate > date.toISOString().slice(0, 10)) return '出生日期不能晚于今天。';
+  if (solarDate > localDateString(date)) return '出生日期不能晚于今天。';
   try {
     computeZiweiHoroscope(solarDate, timeIndex, gender, date);
     return null;
